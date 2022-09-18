@@ -2,15 +2,12 @@ package daos;
 
 import models.BuildingSearchOutput;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface IBuildingDao {
     List<BuildingSearchOutput> findBuilding(
-            String name,
-            String street,
-            String district,
-            String ward,
-            Integer floorArea,
-            String types
+            HashMap<String, Object> queryParams
     );
 }

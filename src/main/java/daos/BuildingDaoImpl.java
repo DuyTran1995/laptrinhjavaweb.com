@@ -8,35 +8,36 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BuildingDaoImpl implements IBuildingDao {
     @Override
-    public List<BuildingSearchOutput> findBuilding(String name, String street, String district, String ward, Integer floorArea, String types) {
+    public List<BuildingSearchOutput> findBuilding(HashMap<String, Object> queryParams) {
         List<BuildingSearchOutput> results = new ArrayList<>();
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        HashMap<String, String> map = new HashMap<>();
         try {
             StringBuilder sql = new StringBuilder("SELECT * FROM building WHERE 1 = 1");
-            if (!StringUtils.isNullOrEmpty(name)) {
-                sql.append(" and name like '%" + name +"%'");
+            if (!StringUtils.isNullOrEmpty(queryParams.get("name"))) {
+                sql.append(" and name like '%" + queryParams.get("name") +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(street)) {
-                sql.append(" and street like '%" + street +"%'");
+            if (!StringUtils.isNullOrEmpty(queryParams.get("street"))) {
+                sql.append(" and street like '%" + queryParams.get("street") +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(district)) {
-                sql.append(" and district like '%" + district +"%'");
+            if (!StringUtils.isNullOrEmpty(queryParams.get("district"))) {
+                sql.append(" and district like '%" + queryParams.get("district") +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(ward)) {
-                sql.append(" and ward like '%" + ward +"%'");
+            if (!StringUtils.isNullOrEmpty(queryParams.get("ward"))) {
+                sql.append(" and ward like '%" + queryParams.get("ward") +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(types)) {
-                sql.append(" and types like '%" + types +"%'");
+            if (!StringUtils.isNullOrEmpty(queryParams.get("types"))) {
+                sql.append(" and types like '%" + queryParams.get("types") +"%'");
             }
-            if (floorArea != null) {
-                sql.append(" and floorArea = " + floorArea + "");
+
+            if (queryParams.get("floorArea") != null) {
+                sql.append(" and floorArea = " + queryParams.get("floorArea") + "");
             }
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = ConnectionUtils.getConnection();
@@ -45,8 +46,8 @@ public class BuildingDaoImpl implements IBuildingDao {
 
             while (resultSet.next()) {
                 BuildingSearchOutput buildingSearchOutput = new BuildingSearchOutput();
-                buildingSearchOutput.setTypes(resultSet.getString("types"));
                 buildingSearchOutput.setName(resultSet.getString("name"));
+                buildingSearchOutput.setTypes(resultSet.getString("types"));
                 results.add(buildingSearchOutput);
             }
         } catch(ClassNotFoundException e) {
