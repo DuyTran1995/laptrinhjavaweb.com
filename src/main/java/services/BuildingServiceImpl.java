@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static utils.ConvertBuildingTypes.ConvertBuildingTypes;
+import static utils.BuildingTypesUtils.ConvertBuildingTypes;
 
 public class BuildingServiceImpl implements IBuildingService {
     BuildingDaoImpl buildingDao = new BuildingDaoImpl();

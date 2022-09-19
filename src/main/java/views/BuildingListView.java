@@ -32,7 +32,7 @@ public class BuildingListView {
         buildingSearchInput.setQueryParams(queryParams);
 
         BuildingController buildingController = new BuildingController();
-        List<HashMap> buildingSearchOutputs = buildingController.findBuilding(buildingSearchInput);
+        List<BuildingSearchOutput> buildingSearchOutputs = buildingController.findBuilding(buildingSearchInput);
         System.out.println("buildingSearchOutputs:" + buildingSearchOutputs);
     }
 }

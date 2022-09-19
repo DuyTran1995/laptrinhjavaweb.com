@@ -17,27 +17,32 @@ public class BuildingDaoImpl implements IBuildingDao {
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        HashMap<String, String> map = new HashMap<>();
+        Object getName = queryParams.get("name");
+        Object getStreet = queryParams.get("street");
+        Object getDistrict = queryParams.get("district");
+        Object getWard = queryParams.get("ward");
+        Object getTypes = queryParams.get("types");
+        Object getFloorArea = queryParams.get("floorArea");
         try {
             StringBuilder sql = new StringBuilder("SELECT * FROM building WHERE 1 = 1");
-            if (!StringUtils.isNullOrEmpty(queryParams.get("name"))) {
-                sql.append(" and name like '%" + queryParams.get("name") +"%'");
+            if (!StringUtils.isNullOrEmpty(getName)) {
+                sql.append(" and name like '%" + getName +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(queryParams.get("street"))) {
-                sql.append(" and street like '%" + queryParams.get("street") +"%'");
+            if (!StringUtils.isNullOrEmpty(getStreet)) {
+                sql.append(" and street like '%" + getStreet +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(queryParams.get("district"))) {
-                sql.append(" and district like '%" + queryParams.get("district") +"%'");
+            if (!StringUtils.isNullOrEmpty(getDistrict)) {
+                sql.append(" and district like '%" + getDistrict +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(queryParams.get("ward"))) {
-                sql.append(" and ward like '%" + queryParams.get("ward") +"%'");
+            if (!StringUtils.isNullOrEmpty(getWard)) {
+                sql.append(" and ward like '%" + getWard +"%'");
             }
-            if (!StringUtils.isNullOrEmpty(queryParams.get("types"))) {
-                sql.append(" and types like '%" + queryParams.get("types") +"%'");
+            if (!StringUtils.isNullOrEmpty(getTypes)) {
+                sql.append(" and types like '%" + getTypes +"%'");
             }
 
-            if (queryParams.get("floorArea") != null) {
-                sql.append(" and floorArea = " + queryParams.get("floorArea") + "");
+            if (getFloorArea != null) {
+                sql.append(" and floorArea = " + getFloorArea + "");
             }
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = ConnectionUtils.getConnection();
