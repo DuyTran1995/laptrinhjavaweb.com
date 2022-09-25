@@ -32,6 +32,14 @@ public class BuildingListView {
         buildingSearchInput.setQueryParams(queryParams);
 
         BuildingController buildingController = new BuildingController();
+        /*
+         * @author: kythuat-laptrinhjavaweb
+         * @since: 9/25/2022 7:31 PM
+         * @description: Sử dụng Map luôn cho tiện thay vì set rồi dưới Service lại get ra
+         * SHOULD: buildingController.findBuilding(queryParams);
+         * @update:
+         *
+        */
         List<BuildingSearchOutput> buildingSearchOutputs = buildingController.findBuilding(buildingSearchInput);
         System.out.println("buildingSearchOutputs: " + buildingSearchOutputs);
     }
