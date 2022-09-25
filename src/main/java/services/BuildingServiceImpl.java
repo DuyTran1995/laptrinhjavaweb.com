@@ -1,27 +1,21 @@
 package services;
 
 import daos.BuildingDaoImpl;
-import models.BuildingSearchInput;
 import models.BuildingSearchOutput;
+import utils.BuildingTypesUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static utils.BuildingTypesUtils.ConvertBuildingTypes;
+import java.util.Map;
 
 public class BuildingServiceImpl implements IBuildingService {
     BuildingDaoImpl buildingDao = new BuildingDaoImpl();
     @Override
-    public List<BuildingSearchOutput> findBuilding(BuildingSearchInput buildingSearchInput) {
+    public List<BuildingSearchOutput> findBuilding(HashMap<String, Object> buildingSearchInput) {
         List<BuildingSearchOutput> resultsData = new ArrayList<>();
-        StringBuilder appendStringTypes = new StringBuilder();
-        HashMap<String, BuildingSearchOutput> buildingSearchOutput = buildingDao.findBuilding(buildingSearchInput.getQueryParams());
-        String[] splitTypes = buildingSearchOutput.get("types").getTypes().split(", ");
-        for (String n: splitTypes) {
-            appendStringTypes.append(" ").append(ConvertBuildingTypes().get(n));
-        }
-        buildingSearchOutput.get("types").setTypes(appendStringTypes.toString());
+        HashMap<String, BuildingSearchOutput> buildingSearchOutput = buildingDao.findBuilding(buildingSearchInput);
+        convertBuildingType(buildingSearchOutput.get("types").getTypes());
 
         resultsData.add(buildingSearchOutput.get("name"));
         resultsData.add(buildingSearchOutput.get("street"));
@@ -29,5 +23,15 @@ public class BuildingServiceImpl implements IBuildingService {
         resultsData.add(buildingSearchOutput.get("ward"));
         resultsData.add(buildingSearchOutput.get("floorArea"));
         return resultsData;
+    }
+
+    private String convertBuildingType(String buildingTypes) {
+        Map<String, String> buildingTypeMap = BuildingTypesUtils.getBuildingTypes();
+        String[] buildingTypeArr = buildingTypes.split(", ");
+        StringBuilder result = new StringBuilder();
+        for (String n: buildingTypeArr) {
+            result.append(" ").append(buildingTypeMap.get(n));
+        }
+        return result.toString();
     }
 }

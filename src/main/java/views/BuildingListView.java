@@ -29,10 +29,10 @@ public class BuildingListView {
 //        buildingSearchInput.setDistrict(district);
 //        buildingSearchInput.setQueryParams(floorArea);
 
-        buildingSearchInput.setQueryParams(queryParams);
+//        buildingSearchInput.setQueryParams(queryParams);
 
         BuildingController buildingController = new BuildingController();
-        List<BuildingSearchOutput> buildingSearchOutputs = buildingController.findBuilding(buildingSearchInput);
+        List<BuildingSearchOutput> buildingSearchOutputs = buildingController.findBuilding(queryParams);
         System.out.println("buildingSearchOutputs: " + buildingSearchOutputs);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class BuildingTypesUtils {
-    static public HashMap<String, String> ConvertBuildingTypes() {
+    static public HashMap<String, String> getBuildingTypes() {
         HashMap<String, String> resultConvertTypes = new HashMap();
         resultConvertTypes.put(BuildingTypes.NGUYEN_CAN_KEY, BuildingTypes.NGUYEN_CAN_VALUE);
         resultConvertTypes.put(BuildingTypes.TANG_TRIET_KEY, BuildingTypes.TANG_TRIET_VALUE);
@@ -29,11 +29,5 @@ public class BuildingTypesUtils {
 //            resultConvertTypes.put(BuildingTypes.TANG_TRIET_KEY, BuildingTypes.NOI_THAT_VALUE);
 //        }
         return resultConvertTypes;
-    }
-
-    static public HashMap<String, Object> getBuildingType(String constantCode, String constantName) {
-        HashMap<String, Object> buildingTypes = new HashMap<>();
-        buildingTypes.put(constantCode, constantName);
-        return buildingTypes;
     }
 }
