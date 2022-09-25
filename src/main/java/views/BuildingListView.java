@@ -33,6 +33,6 @@ public class BuildingListView {
 
         BuildingController buildingController = new BuildingController();
         List<BuildingSearchOutput> buildingSearchOutputs = buildingController.findBuilding(buildingSearchInput);
-        System.out.println("buildingSearchOutputs:" + buildingSearchOutputs);
+        System.out.println("buildingSearchOutputs: " + buildingSearchOutputs);
     }
 }

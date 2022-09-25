@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IBuildingDao {
-    List<BuildingSearchOutput> findBuilding(
+    HashMap<String, BuildingSearchOutput> findBuilding(
             HashMap<String, Object> queryParams
     );
 }

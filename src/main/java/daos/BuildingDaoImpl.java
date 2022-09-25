@@ -12,8 +12,8 @@ import java.util.*;
 
 public class BuildingDaoImpl implements IBuildingDao {
     @Override
-    public List<BuildingSearchOutput> findBuilding(HashMap<String, Object> queryParams) {
-        List<BuildingSearchOutput> results = new ArrayList<>();
+    public HashMap<String, BuildingSearchOutput> findBuilding(HashMap<String, Object> queryParams) {
+        HashMap<String, BuildingSearchOutput> results = new HashMap<>();
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -51,9 +51,19 @@ public class BuildingDaoImpl implements IBuildingDao {
 
             while (resultSet.next()) {
                 BuildingSearchOutput buildingSearchOutput = new BuildingSearchOutput();
-                buildingSearchOutput.setName(resultSet.getString("name"));
                 buildingSearchOutput.setTypes(resultSet.getString("types"));
-                results.add(buildingSearchOutput);
+                buildingSearchOutput.setName(resultSet.getString("name"));
+                buildingSearchOutput.setName(resultSet.getString("street"));
+                buildingSearchOutput.setStreet(resultSet.getString("district"));
+                buildingSearchOutput.setStreet(resultSet.getString("ward"));
+                buildingSearchOutput.setStreet(resultSet.getString("floorArea"));
+
+                results.put("types", buildingSearchOutput);
+                results.put("name", buildingSearchOutput);
+                results.put("street", buildingSearchOutput);
+                results.put("district", buildingSearchOutput);
+                results.put("ward", buildingSearchOutput);
+                results.put("floorArea", buildingSearchOutput);
             }
         } catch(ClassNotFoundException e) {
             e.printStackTrace();

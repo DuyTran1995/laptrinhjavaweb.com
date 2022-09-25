@@ -13,21 +13,21 @@ import static utils.BuildingTypesUtils.ConvertBuildingTypes;
 public class BuildingServiceImpl implements IBuildingService {
     BuildingDaoImpl buildingDao = new BuildingDaoImpl();
     @Override
-    public List findBuilding(BuildingSearchInput buildingSearchInput) {
-        List<String> ConvertBuildingTypesResult = new ArrayList<>();
-        List<HashMap> listBuilding = new ArrayList<>();
-        HashMap resultsData = new HashMap();
-        List<BuildingSearchOutput> buildingSearchOutput = buildingDao.findBuilding(buildingSearchInput.getQueryParams());
-        for (int i = 0; i < buildingSearchOutput.size(); i++) {
-            String[] getBuildingType = buildingSearchOutput.get(i).getTypes().split(", ");
-            for(String n : getBuildingType) {
-                ConvertBuildingTypesResult = ConvertBuildingTypes(n);
-            }
-
-            resultsData.put("types", ConvertBuildingTypesResult);
-            resultsData.put("name", buildingSearchOutput.get(i).getName());
-            listBuilding.add(resultsData);
+    public List<BuildingSearchOutput> findBuilding(BuildingSearchInput buildingSearchInput) {
+        List<BuildingSearchOutput> resultsData = new ArrayList<>();
+        StringBuilder appendStringTypes = new StringBuilder();
+        HashMap<String, BuildingSearchOutput> buildingSearchOutput = buildingDao.findBuilding(buildingSearchInput.getQueryParams());
+        String[] splitTypes = buildingSearchOutput.get("types").getTypes().split(", ");
+        for (String n: splitTypes) {
+            appendStringTypes.append(" ").append(ConvertBuildingTypes().get(n));
         }
-       return listBuilding;
+        buildingSearchOutput.get("types").setTypes(appendStringTypes.toString());
+
+        resultsData.add(buildingSearchOutput.get("name"));
+        resultsData.add(buildingSearchOutput.get("street"));
+        resultsData.add(buildingSearchOutput.get("district"));
+        resultsData.add(buildingSearchOutput.get("ward"));
+        resultsData.add(buildingSearchOutput.get("floorArea"));
+        return resultsData;
     }
 }
