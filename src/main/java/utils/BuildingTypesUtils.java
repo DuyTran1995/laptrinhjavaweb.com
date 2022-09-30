@@ -11,23 +11,10 @@ import java.util.Objects;
 
 public class BuildingTypesUtils {
     static public HashMap<String, String> getBuildingTypes() {
-        HashMap<String, String> resultConvertTypes = new HashMap();
+        HashMap<String, String> resultConvertTypes = new HashMap<>();
         resultConvertTypes.put(BuildingTypes.NGUYEN_CAN_KEY, BuildingTypes.NGUYEN_CAN_VALUE);
         resultConvertTypes.put(BuildingTypes.TANG_TRIET_KEY, BuildingTypes.TANG_TRIET_VALUE);
-        resultConvertTypes.put(BuildingTypes.TANG_TRIET_KEY, BuildingTypes.NOI_THAT_VALUE);
-
-//        if (Objects.equals(types, BuildingTypes.NGUYEN_CAN_KEY)) {
-////            result = "Nguyên Căn";
-//            resultConvertTypes.put(BuildingTypes.NGUYEN_CAN_KEY, BuildingTypes.NGUYEN_CAN_VALUE);
-//        }
-//        if (Objects.equals(types, BuildingTypes.TANG_TRIET_KEY)) {
-////            result = "Tầng Triệt";
-//            resultConvertTypes.put(BuildingTypes.TANG_TRIET_KEY, BuildingTypes.TANG_TRIET_VALUE);
-//        }
-//        if (Objects.equals(types, BuildingTypes.NOI_THAT_KEY)) {
-////            result = "Nội Thất";
-//            resultConvertTypes.put(BuildingTypes.TANG_TRIET_KEY, BuildingTypes.NOI_THAT_VALUE);
-//        }
+        resultConvertTypes.put(BuildingTypes.NOI_THAT_KEY, BuildingTypes.NOI_THAT_VALUE);
         return resultConvertTypes;
     }
 }

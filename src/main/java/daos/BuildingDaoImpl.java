@@ -1,6 +1,6 @@
 package daos;
 
-import models.BuildingSearchOutput;
+import daos.model.BuildingEntity;
 import utils.ConnectionUtils;
 import utils.StringUtils;
 
@@ -12,8 +12,10 @@ import java.util.*;
 
 public class BuildingDaoImpl implements IBuildingDao {
     @Override
-    public HashMap<String, BuildingSearchOutput> findBuilding(HashMap<String, Object> queryParams) {
-        HashMap<String, BuildingSearchOutput> results = new HashMap<>();
+    public List<BuildingEntity> findBuilding(Map<String, Object> queryParams) {
+        BuildingEntity buildingEntity = new BuildingEntity();
+        List<BuildingEntity> result = new ArrayList<>();
+
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -50,21 +52,15 @@ public class BuildingDaoImpl implements IBuildingDao {
             resultSet = statement.executeQuery(sql.toString());
 
             while (resultSet.next()) {
-                BuildingSearchOutput buildingSearchOutput = new BuildingSearchOutput();
-                buildingSearchOutput.setTypes(resultSet.getString("types"));
-                buildingSearchOutput.setName(resultSet.getString("name"));
-                buildingSearchOutput.setName(resultSet.getString("street"));
-                buildingSearchOutput.setStreet(resultSet.getString("district"));
-                buildingSearchOutput.setStreet(resultSet.getString("ward"));
-                buildingSearchOutput.setStreet(resultSet.getString("floorArea"));
-
-                results.put("types", buildingSearchOutput);
-                results.put("name", buildingSearchOutput);
-                results.put("street", buildingSearchOutput);
-                results.put("district", buildingSearchOutput);
-                results.put("ward", buildingSearchOutput);
-                results.put("floorArea", buildingSearchOutput);
+                buildingEntity.setTypes(resultSet.getString("types"));
+                buildingEntity.setName(resultSet.getString("name"));
+                buildingEntity.setStreet(resultSet.getString("street"));
+                buildingEntity.setDistrict(resultSet.getString("district"));
+                buildingEntity.setWard(resultSet.getString("ward"));
+                buildingEntity.setFloorArea(resultSet.getInt("floorArea"));
+                result.add(buildingEntity);
             }
+            return result;
         } catch(ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -78,6 +74,6 @@ public class BuildingDaoImpl implements IBuildingDao {
                 e.printStackTrace();
             }
         }
-        return results;
+        return result;
     }
 }

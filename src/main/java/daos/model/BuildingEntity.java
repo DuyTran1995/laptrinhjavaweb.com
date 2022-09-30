@@ -1,6 +1,6 @@
 package daos.model;
 
-public class BuildingDao {
+public class BuildingEntity {
     private Long id;
     private String name;
     private Integer floorArea;

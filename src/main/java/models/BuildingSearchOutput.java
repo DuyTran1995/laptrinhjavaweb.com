@@ -8,6 +8,14 @@ public class BuildingSearchOutput {
     private Integer floorArea;
     private String types;
 
+    public String getTypes() {
+        return types;
+    }
+
+    public void setTypes(String types) {
+        this.types = types;
+    }
+
     public String getName() {
         return name;
     }
@@ -46,14 +54,5 @@ public class BuildingSearchOutput {
 
     public void setFloorArea(Integer floorArea) {
         this.floorArea = floorArea;
-    }
-
-    public String getTypes() {
-        return types;
-    }
-
-    public Object setTypes(String types) {
-        this.types = types;
-        return null;
     }
 }

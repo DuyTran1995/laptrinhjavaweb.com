@@ -6,6 +6,7 @@ import models.BuildingSearchOutput;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BuildingListView {
     public static void main(String[] args) {
@@ -14,22 +15,13 @@ public class BuildingListView {
         String ward = null;
         String street = null;
         String district = null;
-        HashMap<String, Object> queryParams = new HashMap<>();
+        Map<String, Object> queryParams = new HashMap<>();
 
         queryParams.put("floorArea", 100);
         queryParams.put("name", "n");
         queryParams.put("ward", null);
         queryParams.put("street", null);
         queryParams.put("district", null);
-
-        BuildingSearchInput buildingSearchInput = new BuildingSearchInput();
-//        buildingSearchInput.setName(name);
-//        buildingSearchInput.setWard(ward);
-//        buildingSearchInput.setStreet(street);
-//        buildingSearchInput.setDistrict(district);
-//        buildingSearchInput.setQueryParams(floorArea);
-
-//        buildingSearchInput.setQueryParams(queryParams);
 
         BuildingController buildingController = new BuildingController();
         List<BuildingSearchOutput> buildingSearchOutputs = buildingController.findBuilding(queryParams);
